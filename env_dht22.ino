@@ -13,7 +13,7 @@ void setup() {
 
 void loop() {
   uint8_t deg[3] = { 0xc2, 0xb0 }; //unicode degree symbol
-  uint16_t th = 0, tl = 0, hh = 0, hl = 0, cs = 0;
+  int16_t th = 0, tl = 0, hh = 0, hl = 0, cs = 0;
   uint32_t data[40], response;
   char s[128];
 
@@ -83,7 +83,7 @@ void loop() {
     sprintf(s, String(F("Checksum error: hh = %u, hl = %u, th = %u, tl = %u, cs = %u")).c_str(), hh, hl, th, tl, cs);
     Serial.println(s); 
   } else {
-    sprintf(s, String(F("T = %.1f%.2sC, H = %.1f%%")).c_str(), (int16_t)((th << 8) | tl) * 0.1, (char *)(&deg), ((hh << 8) | hl) * 0.1);
+    sprintf(s, String(F("T = %.1f%.2sC, H = %.1f%%")).c_str(), ((th << 8) | tl) * 0.1, (char *)(&deg), ((hh << 8) | hl) * 0.1);
     Serial.println(s);
   }
 }
